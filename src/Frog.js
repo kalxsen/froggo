@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 function Frog() {
   const [isCroaking, setIsCroaking] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [position, setPosition] = useState({ x: 579, y: 400 }); // ⬅ Set initial position here
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   // 🟢 Play croak sound on hover
@@ -18,7 +18,7 @@ function Frog() {
 
   // 🟢 Start dragging (record offset)
   const handleMouseDown = (e) => {
-    e.preventDefault(); // Prevents default drag behavior
+    e.preventDefault();
     setIsDragging(true);
     setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
   };
@@ -44,16 +44,17 @@ function Frog() {
     <img
       src={isCroaking ? "croaking_frog.png" : "frog.png"}
       alt="Frog"
-      width="200"
+      width="100"
       style={{
         position: "absolute",
         left: position.x,
         top: position.y,
         cursor: isDragging ? "grabbing" : "grab",
-        userSelect: "none", // Prevents text selection
+        userSelect: "none",
+        pointerEvents: "auto",
       }}
       onMouseDown={handleMouseDown}
-      onMouseEnter={croak} // Plays croak when hovered
+      onMouseEnter={croak}
     />
   );
 }
